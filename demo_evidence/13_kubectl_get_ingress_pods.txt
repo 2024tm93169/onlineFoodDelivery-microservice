@@ -1,0 +1,7 @@
+>>> COMMAND: kubectl get pods -n ingress-nginx
+
+>>> OUTPUT:
+NAME                                       READY   STATUS      RESTARTS      AGE
+ingress-nginx-admission-create-q6vrc       0/1     Completed   0             13h
+ingress-nginx-admission-patch-kvj7h        0/1     Completed   1             13h
+ingress-nginx-controller-9cc49f96f-c7nd9   1/1     Running     2 (13h ago)   13h

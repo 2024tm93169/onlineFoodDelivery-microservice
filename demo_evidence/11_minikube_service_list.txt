@@ -1,0 +1,23 @@
+>>> COMMAND: minikube service list
+
+>>> OUTPUT:
+┌───────────────┬────────────────────────────────────┬──────────────┬─────┐
+│   NAMESPACE   │                NAME                │ TARGET PORT  │ URL │
+├───────────────┼────────────────────────────────────┼──────────────┼─────┤
+│ default       │ kubernetes                         │ No node port │     │
+│ foodgo        │ customer-db                        │ No node port │     │
+│ foodgo        │ customer-service                   │ No node port │     │
+│ foodgo        │ delivery-db                        │ No node port │     │
+│ foodgo        │ delivery-service                   │ No node port │     │
+│ foodgo        │ notification-service               │ No node port │     │
+│ foodgo        │ order-db                           │ No node port │     │
+│ foodgo        │ order-service                      │ No node port │     │
+│ foodgo        │ payment-db                         │ No node port │     │
+│ foodgo        │ payment-service                    │ No node port │     │
+│ foodgo        │ restaurant-db                      │ No node port │     │
+│ foodgo        │ restaurant-service                 │ No node port │     │
+│ ingress-nginx │ ingress-nginx-controller           │ http/80      │     │
+│               │                                    │ https/443    │     │
+│ ingress-nginx │ ingress-nginx-controller-admission │ No node port │     │
+│ kube-system   │ kube-dns                           │ No node port │     │
+└───────────────┴────────────────────────────────────┴──────────────┴─────┘

@@ -1,0 +1,4 @@
+>>> COMMAND: curl -X POST http://foodgo.local:60715/v1/orders -H "Content-Type: application/json" -H "Idempotency-Key: 3333e444-e888-1111-a444-426614174003" -d '{"customer_id": 3, "restaurant_id": 1, "address_id": 1, "city": "Pune", "lines": [ {"item_id": 1, "quantity": 2}, {"item_id": 3, "quantity": 1} ], "payment_method": "CREDIT_CARD"}'
+
+>>> OUTPUT:
+{"order_id":3,"order_status":"CONFIRMED","payment_status":"SUCCESS","order_total":969.42}

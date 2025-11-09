@@ -1,0 +1,12 @@
+NAME                                   READY   STATUS    RESTARTS   AGE
+customer-db-747477b4c5-z2lgl           1/1     Running   0          13h
+customer-service-6957cb5cc5-84jfg      1/1     Running   0          13h
+delivery-db-56d4744767-xxjf6           1/1     Running   0          13h
+delivery-service-58885c56bb-5cqgn      1/1     Running   0          13h
+notification-service-8f4c6666d-p9qfc   1/1     Running   0          13h
+order-db-7cbc98d98f-hms7p              1/1     Running   0          13h
+order-service-5644bf46cc-trvp5         1/1     Running   0          13h
+payment-db-6645d655c5-sh9md            1/1     Running   0          13h
+payment-service-6c4447df8f-xrlb6       1/1     Running   0          13h
+restaurant-db-55dcbd85cb-6sr55         1/1     Running   0          13h
+restaurant-service-b9977bd6c-ps5hk     1/1     Running   0          13h

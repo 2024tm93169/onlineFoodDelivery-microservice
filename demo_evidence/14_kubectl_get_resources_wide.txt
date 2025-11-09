@@ -1,0 +1,41 @@
+>>> COMMAND: kubectl -n foodgo get pods,svc,deploy -o wide
+
+>>> OUTPUT:
+NAME                                       READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+pod/customer-db-747477b4c5-z2lgl           1/1     Running   0          14h   10.244.0.41   minikube   <none>           <none>
+pod/customer-service-6957cb5cc5-84jfg      1/1     Running   0          13h   10.244.0.52   minikube   <none>           <none>
+pod/delivery-db-56d4744767-xxjf6           1/1     Running   0          14h   10.244.0.43   minikube   <none>           <none>
+pod/delivery-service-58885c56bb-5cqgn      1/1     Running   0          13h   10.244.0.54   minikube   <none>           <none>
+pod/notification-service-8f4c6666d-p9qfc   1/1     Running   0          13h   10.244.0.53   minikube   <none>           <none>
+pod/order-db-7cbc98d98f-hms7p              1/1     Running   0          14h   10.244.0.45   minikube   <none>           <none>
+pod/order-service-5644bf46cc-trvp5         1/1     Running   0          13h   10.244.0.51   minikube   <none>           <none>
+pod/payment-db-6645d655c5-sh9md            1/1     Running   0          14h   10.244.0.48   minikube   <none>           <none>
+pod/payment-service-6c4447df8f-xrlb6       1/1     Running   0          13h   10.244.0.56   minikube   <none>           <none>
+pod/restaurant-db-55dcbd85cb-6sr55         1/1     Running   0          14h   10.244.0.50   minikube   <none>           <none>
+pod/restaurant-service-b9977bd6c-ps5hk     1/1     Running   0          13h   10.244.0.55   minikube   <none>           <none>
+
+NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+service/customer-db            ClusterIP   10.103.194.130   <none>        5432/TCP   14h   app=customer-db
+service/customer-service       ClusterIP   10.102.32.49     <none>        80/TCP     14h   app=customer-service
+service/delivery-db            ClusterIP   10.110.130.226   <none>        5432/TCP   14h   app=delivery-db
+service/delivery-service       ClusterIP   10.105.20.161    <none>        80/TCP     14h   app=delivery-service
+service/notification-service   ClusterIP   10.96.40.35      <none>        80/TCP     14h   app=notification-service
+service/order-db               ClusterIP   10.102.198.191   <none>        5432/TCP   14h   app=order-db
+service/order-service          ClusterIP   10.101.217.142   <none>        80/TCP     14h   app=order-service
+service/payment-db             ClusterIP   10.108.62.0      <none>        5432/TCP   14h   app=payment-db
+service/payment-service        ClusterIP   10.96.135.6      <none>        80/TCP     14h   app=payment-service
+service/restaurant-db          ClusterIP   10.111.43.100    <none>        5432/TCP   14h   app=restaurant-db
+service/restaurant-service     ClusterIP   10.101.132.201   <none>        80/TCP     14h   app=restaurant-service
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS             IMAGES                        SELECTOR
+deployment.apps/customer-db            1/1     1            1           14h   postgres               postgres:16                   app=customer-db
+deployment.apps/customer-service       1/1     1            1           14h   customer-service       customer-service:latest       app=customer-service
+deployment.apps/delivery-db            1/1     1            1           14h   postgres               postgres:16                   app=delivery-db
+deployment.apps/delivery-service       1/1     1            1           14h   delivery-service       delivery-service:latest       app=delivery-service
+deployment.apps/notification-service   1/1     1            1           14h   notification-service   notification-service:latest   app=notification-service
+deployment.apps/order-db               1/1     1            1           14h   postgres               postgres:16                   app=order-db
+deployment.apps/order-service          1/1     1            1           14h   order-service          order-service:latest          app=order-service
+deployment.apps/payment-db             1/1     1            1           14h   postgres               postgres:16                   app=payment-db
+deployment.apps/payment-service        1/1     1            1           14h   payment-service        payment-service:latest        app=payment-service
+deployment.apps/restaurant-db          1/1     1            1           14h   postgres               postgres:16                   app=restaurant-db
+deployment.apps/restaurant-service     1/1     1            1           14h   restaurant-service     restaurant-service:latest     app=restaurant-service

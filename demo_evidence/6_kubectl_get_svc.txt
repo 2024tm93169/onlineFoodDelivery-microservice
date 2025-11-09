@@ -1,0 +1,12 @@
+NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+customer-db            ClusterIP   10.103.194.130   <none>        5432/TCP   13h
+customer-service       ClusterIP   10.102.32.49     <none>        80/TCP     13h
+delivery-db            ClusterIP   10.110.130.226   <none>        5432/TCP   13h
+delivery-service       ClusterIP   10.105.20.161    <none>        80/TCP     13h
+notification-service   ClusterIP   10.96.40.35      <none>        80/TCP     13h
+order-db               ClusterIP   10.102.198.191   <none>        5432/TCP   13h
+order-service          ClusterIP   10.101.217.142   <none>        80/TCP     13h
+payment-db             ClusterIP   10.108.62.0      <none>        5432/TCP   13h
+payment-service        ClusterIP   10.96.135.6      <none>        80/TCP     13h
+restaurant-db          ClusterIP   10.111.43.100    <none>        5432/TCP   13h
+restaurant-service     ClusterIP   10.101.132.201   <none>        80/TCP     13h

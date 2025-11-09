@@ -1,0 +1,234 @@
+INFO:     10.244.0.1:38708 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38714 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.60:59980 - "POST /v1/customers HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "ix_customers_phone"
+DETAIL:  Key (phone)=(9876543213) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 406, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/local/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_utils.py", line 83, in collapse_excgroups
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/main.py", line 29, in add_correlation_id
+    response: Response = await call_next(request)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routers/customers.py", line 75, in create_customer
+    db.commit()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "ix_customers_phone"
+DETAIL:  Key (phone)=(9876543213) already exists.
+
+[SQL: INSERT INTO customers (name, email, phone) VALUES (%(name)s, %(email)s, %(phone)s) RETURNING customers.customer_id, customers.created_at]
+[parameters: {'name': 'Test Customer 3', 'email': 'customer3@evidence.com', 'phone': '9876543213'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+INFO:     10.244.0.1:36058 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:36072 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:36074 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:41326 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:41332 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:41338 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38022 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38032 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38038 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38386 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38402 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:38414 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:37324 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:37336 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:37352 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:33958 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:33970 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:33986 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:36588 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:36594 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:36596 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49510 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49522 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49536 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:39892 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:39898 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:39912 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:55514 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:55520 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:55536 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54706 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54722 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54726 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:57146 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:57150 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:57164 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:47966 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:47970 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:47986 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54638 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54648 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54658 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54870 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54874 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54876 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54034 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54038 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54054 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.60:35180 - "GET /v1/customers HTTP/1.1" 200 OK
+INFO:     10.244.0.1:42350 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:42358 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:42374 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49768 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49782 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:49784 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:58262 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:58270 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:58286 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54158 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54174 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54180 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:60764 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:60776 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:60784 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43336 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43350 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43364 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43390 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43406 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43416 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43608 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43620 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:43636 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:50766 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:50770 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:50784 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:34236 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:34238 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:34254 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:56922 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:56926 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:56938 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.60:49866 - "POST /v1/customers HTTP/1.1" 201 Created
+INFO:     10.244.0.1:46962 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:46974 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:46986 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:53534 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:53536 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:53544 - "GET /health HTTP/1.1" 200 OK
+INFO:     10.244.0.1:41082 - "GET /health HTTP/1.1" 200 OK

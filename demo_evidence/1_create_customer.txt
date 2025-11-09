@@ -1,0 +1,4 @@
+>>> COMMAND: curl -X POST http://foodgo.local:60715/v1/customers -H "Content-Type: application/json" -d '{"name": "Test Customer 3", "email": "customer3@evidence.com", "address": "789 Evidence St", "phone": "9876543213"}'
+
+>>> OUTPUT:
+{"customer_id":4,"name":"Test Customer 3","email":"customer3@evidence.com","phone":"9876543273"}
