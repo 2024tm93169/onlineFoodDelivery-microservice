@@ -1,16 +1,16 @@
 # FoodGo — Submission Document (to export as PDF once the editing completed)
 
-Group: PS2 
+Group: PS2 18
 Date: 2025-10-16
-
-> Replace placeholders (group id, member names/emails, repo URLs) and export this file to PDF.  
-> Screenshots checklist is provided below.
 
 ---
 
 1. Team & Contributions
 
-Anand Prakash - 2024TM93169 - 100%
+- Anand Prakash (2024TM93169) — 100% contribution — Services: Customer, Order, Restaurant, Delivery, Notification, Payment
+- Kishore Kumar B (2024tm93164) - 100% contribution - Services: Customer, Order, Restaurant, Delivery, Notification, Payment
+- Silmia A (2024tm93174) - 100% contribution - Services: Customer, Order, Restaurant, Delivery, Notification, Payment
+- Viveka Nand Pathak (2024tm93177) - 50% contribution - Documentation
 
 2. Application Overview
 
